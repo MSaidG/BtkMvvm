@@ -3,9 +3,8 @@ package com.btk.btkmvvm.ui.food
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.btk.btkmvvm.data.model.CommentResponse
+import com.btk.btkmvvm.data.model.FoodModelItem
 import com.btk.btkmvvm.data.model.FoodResponse
-import com.btk.btkmvvm.data.repository.comment.CommentRepository
 import com.btk.btkmvvm.data.repository.food.FoodRepository
 import com.btk.btkmvvm.ui.base.BaseViewModel
 import com.btk.btkmvvm.util.constants.ResourceStatus
@@ -16,13 +15,13 @@ import javax.inject.Inject
 @HiltViewModel
 class FoodViewModel @Inject constructor(private val foodRepository: FoodRepository)  : BaseViewModel()  {
 
-    var allFoodsLiveData = MutableLiveData<FoodResponse>()
+    var allFoodsLiveData = MutableLiveData<FoodModelItem>()
 
     init {
         getAllFoods()
     }
 
-    fun getAllFoods() = viewModelScope.launch {
+    private fun getAllFoods() = viewModelScope.launch {
         foodRepository.getAllFoods()
             .asLiveData(viewModelScope.coroutineContext).observeForever {
                 when (it.status) {

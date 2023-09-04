@@ -1,6 +1,5 @@
 package com.btk.btkmvvm.util.constants
 
-import com.btk.btkmvvm.data.model.UserModelItem
 
 sealed class Resource<T>(
     val data: T?,

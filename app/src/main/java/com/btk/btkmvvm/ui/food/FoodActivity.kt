@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.btk.btkmvvm.R
-import com.btk.btkmvvm.ui.comment.CommentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,24 +22,22 @@ class FoodActivity : AppCompatActivity() {
     fun observeViewModel()
     {
         viewModel.apply {
-            allFoodsLiveData.observe(this@FoodActivity, Observer {
+            allFoodsLiveData.observe(this@FoodActivity) {
 
-                it.forEach {
-                    Log.e("CAGATAY","FOOD it " +it.abbreviatedProductName)
-                }
+                Log.e("CAGATAY", "AbbreciatedProductName: " + it.abbreviatedProductName)
 
-            })
+            }
 
-            error.observe(this@FoodActivity, Observer {
+            error.observe(this@FoodActivity) {
                 it.run {
-                    Log.e("CAGATAY","FOOD it " +it.message)
+                    Log.e("CAGATAY", "Error: $it")
 
                 }
-            })
-            loading.observe(this@FoodActivity, Observer {
-                Log.e("CAGATAY","FOOD it " +it.toString())
+            }
+            loading.observe(this@FoodActivity) {
+                Log.e("CAGATAY", "Loading $it")
 
-            })
+            }
 
         }
     }
